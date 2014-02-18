@@ -1,0 +1,8 @@
+Run:
+	sudo systemctl start httpd.service
+
+reload:
+	sudo systemctl reload httpd.service
+
+log:
+	tail 

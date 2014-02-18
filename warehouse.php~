@@ -178,9 +178,6 @@ Author: Rui Oliveira
 		}
 
 
-
-
-
 		private function image(){
 			if($this->get_request_method() == "POST"){
 				if(!$this->confirmLogin()){$this->response('',401);}
