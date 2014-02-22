@@ -104,6 +104,9 @@
 			}
 		}		
 		
+
+		
+
 		private function cleanInputs($data){
 			$clean_input = array();
 			if(is_array($data)){
@@ -125,51 +128,13 @@
 			header("Content-Type:".$this->_content_type);
 		}
 
-		/*
+	/*
 		 *	Encode array into JSON
 		*/
-		public function json($data){
+		private function json($data){
 			if(is_array($data)){
 				return json_encode($data);
 			}
-		}
-
-
-
-		public function simpleGet($query,$name){
-			$sql = mysql_query($query, $this->db);
-			if(mysql_num_rows($sql) > 0){
-				$result = array();
-				while($rlt = mysql_fetch_array($sql,MYSQL_ASSOC)){
-					$result[] = $rlt;
-				}
-				$final;
-				if (empty($name)){
-					$final = $result[1];
-				}else{
-					$final = array($name => $result);
-				}
-				// If success everythig is good send header as "OK" and return list of users in JSON format
-				$this->response($this->json($final), 200);
-			}
-			$this->response('',204);	// If no records "No Content" status
-		}
-		public function simpleDelete($query){
-			$sql = mysql_query($query, $this->db);
-			$success = array('status' => "Success", "msg" => "Successfully one record deleted.");
-			$this->response($this->json($success),200);
-		}
-		public function simplePut($query){
-			$sql = mysql_query($query,$this->db);
-			$success = array('status' => "Success", "msg" => "Successfully one record edited.");
-			$this->response($this->json($success),200);
-		}
-		public function simplePost($query){
-			$sql = mysql_query($query,$this->db);
-			$sql = mysql_query("select LAST_INSERT_ID() as li",$this->db);$row=mysql_fetch_row($sql,MYSQL_ASSOC);
-			$lastid = $row['li'];
-			$success = array('status' => "Success", "msg" => "Successfully one record add.","lastid" => $lastid);
-			$this->response($this->json($success),200);
 		}
 	}	
 ?>
